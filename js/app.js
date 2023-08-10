@@ -122,43 +122,26 @@ products_Db.forEach(function (productObj) {
 
 /* generate all product of store */
 function generateAllProducts(productObj) {
-  // product box element
-  let productElem = $.createElement("div");
-  productElem.classList.add("product");
+  productsWrapper.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="product">
+  <h3 class="product-title">${productObj.title}</h3>
+  <div class="product-pic">
+    <img src="${productObj.thumbnail}" alt="">
+  </div>
+  <div class="product-details">
+    <p class="product-price">$ ${productObj.price}</p>
+    <div class="add-product-btn">
+      Add to cart
+    </div>
+  </div>
+</div>`
+  );
 
-  // product title
-  let productTitleElem = $.createElement("h3");
-  productTitleElem.classList.add("product-title");
-  productTitleElem.innerHTML = productObj.title;
-
-  // product image
-  let productPicElem = $.createElement("div");
-  productPicElem.classList.add("product-pic");
-  let productImage = $.createElement("img");
-  productImage.setAttribute("src", productObj.thumbnail);
-  productPicElem.append(productImage);
-
-  // product details
-  let productDetailsElem = $.createElement("div");
-  productDetailsElem.classList.add("product-details");
-  // product price
-  let productPriceElem = $.createElement("p");
-  productPicElem.classList.add("product-price");
-  productPriceElem.innerHTML = "$ " + productObj.price;
-  // product add to cart button
-  let addProductBtn = $.createElement("div");
-  addProductBtn.classList.add("add-product-btn");
-  addProductBtn.innerHTML = "Add to cart";
-
-  /**** set addEventListener to add to cart  button to add product to basket ****/
-  addProductBtn.addEventListener("click", function () {
+  let addToCartBtn = $.querySelector(".add-product-btn");
+  addToCartBtn.addEventListener("click", function () {
     addToUserBasketArray(productObj.id);
   });
-  productDetailsElem.append(productPriceElem, addProductBtn);
-  productElem.append(productTitleElem, productPicElem, productDetailsElem);
-
-  // add product to product wrapper
-  productsWrapper.append(productElem);
 }
 
 /* Add Product to userbasket array */
@@ -198,46 +181,25 @@ function addToUserBasketArray(productId) {
 function basketItemGenerator(userbasketArray) {
   cartItemsContainer.innerHTML = "";
   userbasketArray.forEach(function (productObj) {
-    // cart item row
-    let cartItemRowElem = $.createElement("div");
-    cartItemRowElem.classList.add("cart-item-row");
+    cartItemsContainer.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="cart-item-row">
+    <div class="cart-item-info">
+    <div class="cart-item-thumbnail">
+    <img src="${productObj.thumbnail}" alt="">
+    </div>
+    <h4 class="cart-item-name">${productObj.title}</h4>
+    </div>
+    <p class="cart-item-price">$ ${productObj.price}</p>
+    <div class="cart-item-quantity-wrapper">
+    <input class="cart-item-input-number" type="number" value="${productObj.count}">
+    <div class="remove-cart-item-btn">Remove</div>
+    </div>
+    </div>`
+    );
 
-    // cart item info
-    let cartItemInfoElem = $.createElement("div");
-    cartItemInfoElem.classList.add("cart-item-info");
-
-    // cart item thumbnail
-    let cartItemThumbnailElem = $.createElement("div");
-    cartItemThumbnailElem.classList.add("cart-item-thumbnail");
-
-    let cartItemImageElem = $.createElement("img");
-    cartItemImageElem.setAttribute("src", productObj.thumbnail);
-
-    cartItemThumbnailElem.append(cartItemImageElem);
-
-    // cart item name
-    let cartItemNameElem = $.createElement("p");
-    cartItemNameElem.classList.add("cart-item-name");
-    cartItemNameElem.innerHTML = productObj.title;
-
-    cartItemInfoElem.append(cartItemThumbnailElem, cartItemNameElem);
-
-    // cart item price
-    let cartItemPriceElem = $.createElement("p");
-    cartItemPriceElem.classList.add("cart-item-price");
-    cartItemPriceElem.innerHTML = "$ " + productObj.price;
-
-    // cart item quantity wrapper
-    let cartItemQuantityWrapper = $.createElement("div");
-    cartItemQuantityWrapper.classList.add("cart-item-quantity-wrapper");
-
-    // cart item input number
-    let cartItemInputElem = $.createElement("input");
-    cartItemInputElem.classList.add("cart-item-input-number");
-    cartItemInputElem.setAttribute("type", "number");
-    cartItemInputElem.setAttribute("value", productObj.count);
-    cartItemInputElem.setAttribute("min", 1);
-
+    // calc total price when change count of product
+    let cartItemInputElem = $.querySelector(".cart-item-input-number");
     cartItemInputElem.addEventListener("change", function (event) {
       productObj.count = event.target.value;
 
@@ -258,12 +220,8 @@ function basketItemGenerator(userbasketArray) {
       calcTotalPrice(userbasketArray);
     });
 
-    // remove cart item button
-    let removeCartItemBtn = $.createElement("div");
-    removeCartItemBtn.classList.add("remove-cart-item-btn");
-    removeCartItemBtn.innerHTML = "Remove";
-
     /* remove item with click on remove button */
+    let removeCartItemBtn = $.querySelector(".remove-cart-item-btn")
     removeCartItemBtn.addEventListener("click", function (event) {
       let removedProductIndex = userbasketArray.findIndex(function (product) {
         return (
@@ -285,16 +243,6 @@ function basketItemGenerator(userbasketArray) {
         tableTitles.style.display = "none";
       }
     });
-
-    cartItemQuantityWrapper.append(cartItemInputElem, removeCartItemBtn);
-
-    cartItemRowElem.append(
-      cartItemInfoElem,
-      cartItemPriceElem,
-      cartItemQuantityWrapper
-    );
-
-    cartItemsContainer.append(cartItemRowElem);
   });
 }
 
