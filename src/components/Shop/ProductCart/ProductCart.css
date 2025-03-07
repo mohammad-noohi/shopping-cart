@@ -1,0 +1,39 @@
+.product-row {
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.product-item__img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
+.prodcut-item__title {
+}
+
+.prodcut-item__price {
+  text-align: center;
+}
+
+.product-row__remove-btn {
+  display: block;
+  margin: 0 auto;
+  background-color: crimson;
+  padding: 0.8rem 1.6rem;
+  font-size: inherit;
+  text-transform: capitalize;
+  color: #fff;
+  border-radius: 0.4rem;
+}
+
+@media screen and (max-width: 576px) {
+  .prodcut-item__title {
+    display: none;
+  }
+}

@@ -1,0 +1,10 @@
+.footer {
+  background-color: #fff;
+  box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer__wrapper {
+  padding: 3rem 0;
+  text-align: center;
+  text-transform: capitalize;
+}

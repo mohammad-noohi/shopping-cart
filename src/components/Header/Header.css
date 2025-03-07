@@ -1,0 +1,22 @@
+.header {
+  background-color: #fff;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  padding: 3rem 0;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.menu__item {
+}
+
+.menu__link {
+  font-size: 1.8rem;
+  text-transform: capitalize;
+}
