@@ -7,14 +7,16 @@ class ProductBox extends React.Component {
   }
 
   render() {
+    const { id, pic, title, price } = this.props;
+
     return (
       <div className="product-card">
-        <img className="product-card__img" src={this.props.pic} alt="" />
+        <img className="product-card__img" src={pic} alt="" />
         <div className="product-card__body">
-          <p className="product-card__title">{this.props.title}</p>
+          <p className="product-card__title">{title}</p>
           <div className="product-card__infos">
-            <span className="product-card__price">${this.props.price}</span>
-            <button className="product-card__btn" onClick={this.addToCartHandler.bind(this, this.props.id)}>
+            <span className="product-card__price">${price}</span>
+            <button className="product-card__btn" onClick={this.addToCartHandler.bind(this, id)}>
               add to cart
             </button>
           </div>

@@ -7,19 +7,21 @@ class ProductCart extends React.Component {
   }
 
   render() {
+    const { id, pic, title, price } = this.props;
+
     return (
       <tr className="product-row">
         <td>
           <div className="product-item">
-            <img className="product-item__img" src={this.props.pic} alt="" />
-            <span className="prodcut-item__title">{this.props.title}</span>
+            <img className="product-item__img" src={pic} alt="" />
+            <span className="prodcut-item__title">{title}</span>
           </div>
         </td>
         <td>
-          <p className="prodcut-item__price">${this.props.price}</p>
+          <p className="prodcut-item__price">${price}</p>
         </td>
         <td>
-          <button className="product-row__remove-btn" onClick={this.removeProdcut.bind(this, this.props.id)}>
+          <button className="product-row__remove-btn" onClick={this.removeProdcut.bind(this, id)}>
             delete
           </button>
         </td>
